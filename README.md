@@ -17,7 +17,7 @@ No Need To Ask Wifi Password, HACK it..! This Cyber Security Tool, Will Hack For
 
 
 
-## Features and Contents :
+## Features and Conten :
 
 
 ```bash 
